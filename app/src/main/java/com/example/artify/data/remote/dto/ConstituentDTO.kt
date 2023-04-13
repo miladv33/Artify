@@ -1,4 +1,4 @@
-package com.example.artify.data.dto
+package com.example.artify.data.remote.dto
 
 data class ConstituentDTO(
     val constituentID: Int,

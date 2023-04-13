@@ -2,7 +2,7 @@ package com.example.artify.data.remote;
 
 import android.app.appsearch.SearchResult;
 
-import com.example.artify.data.dto.MetObjectDTO;
+import com.example.artify.data.remote.dto.MetObjectDTO;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
