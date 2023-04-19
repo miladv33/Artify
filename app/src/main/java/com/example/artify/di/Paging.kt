@@ -1,5 +1,6 @@
 package com.example.artify.di
 
+import androidx.paging.PagingConfig
 import com.example.artify.data.map.mappers.SearchedMapper
 import com.example.artify.data.paging.SearchPagingSource
 import com.example.artify.data.paging.SearchQuery
@@ -29,4 +30,12 @@ object Paging {
         return SearchQuery()
     }
 
+    @Singleton
+    @Provides
+    fun providePagingConfig(): PagingConfig {
+        return PagingConfig(
+            pageSize = 20, // Number of items to load at once
+            enablePlaceholders = false // Disable null placeholders
+        )
+    }
 }
