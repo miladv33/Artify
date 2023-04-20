@@ -20,7 +20,7 @@ class SearchUseCaseImpl @Inject constructor(
         pagingSource.setQuery(query)
          return Pager(
             config = pagingConfig,
-            pagingSourceFactory ={ pagingSource }
+            pagingSourceFactory = { pagingSource }
         ).flow
     }
 

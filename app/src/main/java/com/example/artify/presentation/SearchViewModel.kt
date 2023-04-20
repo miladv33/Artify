@@ -18,8 +18,8 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(private val searchUserCase: SearchUserCase) :
     ViewModel() {
     private val _searchResult: MutableLiveData<PagingData<Int>> = MutableLiveData()
-    private val searchResult: LiveData<PagingData<Int>> = _searchResult
-    fun search(query: String) {
+     val searchResult: LiveData<PagingData<Int>> = _searchResult
+    fun search(query: String)  {
         viewModelScope.launch {
             searchUserCase.search(query).flowOn(Dispatchers.IO)
                 .collect {

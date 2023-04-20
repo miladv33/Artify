@@ -21,6 +21,7 @@ class SearchPagingSource @Inject constructor(
     private var total: Int = 0
 
     fun setQuery(query: String) {
+        cachedData = null
         searchQuery.setQuery(query)
     }
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Int> {
