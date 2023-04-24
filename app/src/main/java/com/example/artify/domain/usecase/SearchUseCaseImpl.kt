@@ -23,5 +23,4 @@ class SearchUseCaseImpl @Inject constructor(
             pagingSourceFactory = { pagingSource }
         ).flow
     }
-
 }

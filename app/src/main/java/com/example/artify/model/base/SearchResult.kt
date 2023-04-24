@@ -1,5 +1,5 @@
 package com.example.artify.model.base
 
 data class SearchResult(
-    val objectIDs: List<Int>
+    var objectIDs: List<Int>
 ) : Model()

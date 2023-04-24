@@ -2,6 +2,7 @@ package com.example.artify.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.example.artify.data.SearchRepository
 import com.example.artify.data.enum.Error
 import com.example.artify.data.map.mappers.SearchedMapper
 import com.example.artify.data.remote.MetService
@@ -24,6 +25,7 @@ class SearchPagingSource @Inject constructor(
         cachedData = null
         searchQuery.setQuery(query)
     }
+
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Int> {
         val page = params.key ?: 1 // start from page 1 if null
         return try {
@@ -36,7 +38,7 @@ class SearchPagingSource @Inject constructor(
             }
             if (cachedData?.isSuccess == true) {
                 LoadResult.Page(
-                    data = cachedData?.getOrNull()?.objectIDs ?: arrayListOf(),
+                    data = getFirstPage(cachedData) ?: arrayListOf(),
                     prevKey = if (page == 1) null else page - 1, // null if first page
                     nextKey = if (page == total) null else page + 1 // null if last page
                 )
@@ -46,6 +48,12 @@ class SearchPagingSource @Inject constructor(
         } catch (e: Exception) {
             LoadResult.Error(e) // return error if exception occurs
         }
+    }
+
+    fun getFirstPage(searchResult: Result<SearchResult>?): List<Int>? {
+        val subList = searchResult?.getOrNull()?.objectIDs?.subList(0, 20)
+        searchResult?.getOrNull()?.objectIDs = searchResult?.getOrNull()?.objectIDs?.drop(20)?: arrayListOf()
+        return subList
     }
 
     override fun getRefreshKey(state: PagingState<Int, Int>): Int? {

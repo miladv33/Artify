@@ -30,6 +30,8 @@ buildscript {
         lifecycle_version = '2.2.0'
         reflection_version = '1.7.20'
         mockkVersion = '1.13.3'//5
+        paging_compose_version = "1.0.0-alpha01"
+
     }
     dependencies {
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.42'

@@ -64,6 +64,7 @@ dependencies {
     implementation "androidx.compose.ui:ui:$compose_ui_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
     implementation 'androidx.compose.material:material:1.2.0'
+    implementation "androidx.paging:paging-compose:1.0.0-alpha17"
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.junit.jupiter:junit-jupiter'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -78,7 +79,6 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_runtime_version"
     implementation "androidx.activity:activity-compose:$activity_compose_version"
-    implementation 'androidx.paging:paging-common-ktx:3.1.1'
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$test_ext_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
@@ -148,7 +148,5 @@ dependencies {
 // Needed for createComposeRule, but not createAndroidComposeRule:
     debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_version")
     testImplementation 'org.mockito:mockito-inline:4.0.0'
-
     testImplementation "io.mockk:mockk:$mockkVersion"
-
 }

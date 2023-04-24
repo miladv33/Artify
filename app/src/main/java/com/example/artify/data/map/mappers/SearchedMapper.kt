@@ -12,10 +12,11 @@ class SearchedMapper @Inject constructor(
     override val failedMapperDelegate: FailedMapperDelegateImpl
 ) : ResponseMapper<SearchResultDTO, SearchResult>, FailedMapperDelegate by failedMapperDelegate {
     override fun createModelFromDTO(input: Response<SearchResultDTO>): SearchResult {
-        return input.body()?.let {
-            SearchResult(it.objectIDs)
-        }.run {
+        val result = if (input.body() != null) {
+            SearchResult(input.body()!!.objectIDs)
+        }else{
             SearchResult(arrayListOf())
         }
+        return result
     }
 }

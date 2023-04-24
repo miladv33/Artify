@@ -11,8 +11,11 @@ interface ResponseMapper<DTO, T : Model> {
 
     fun map(input: Response<DTO>?): Result<T> {
         return input?.body()?.let { createModelFromDTO(input) }
-            ?.let { Result.success(it) }
-            ?: failedMapperDelegate.mapFailure(CustomException(Error.NullObject))
+            ?.let {
+                Result.success(it)
+            }
+            ?:
+            failedMapperDelegate.mapFailure(CustomException(Error.NullObject))
     }
 
     fun createModelFromDTO(input: Response<DTO>): T
