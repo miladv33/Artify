@@ -1,6 +1,7 @@
 package com.example.artify.di
 
 import androidx.paging.PagingConfig
+import com.example.artify.data.SearchRepository
 import com.example.artify.data.paging.SearchPagingSource
 import com.example.artify.domain.usecase.SearchUseCaseImpl
 import com.example.artify.domain.usecase.SearchUserCase
@@ -17,9 +18,8 @@ object UseCase {
     @Singleton
     @Provides
     fun provideSearchUseCase(
-        pagingSource: SearchPagingSource,
-        pagingConfig: PagingConfig
+        repository: SearchRepository
     ): SearchUserCase {
-        return SearchUseCaseImpl(pagingSource, pagingConfig)
+        return SearchUseCaseImpl(repository)
     }
 }

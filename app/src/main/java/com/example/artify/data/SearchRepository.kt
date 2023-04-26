@@ -8,12 +8,13 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class SearchRepository @Inject constructor(
-    private val searchPagingSourceFactory: SearchPagingSource
+    private val pagingSource: SearchPagingSource,
+    private val pagingConfig: PagingConfig
 ){
     fun getSearchResults(query: String): Flow<PagingData<Int>> {
-        val pagingSource = searchPagingSourceFactory
+        val pagingSource = pagingSource
         pagingSource.setQuery(query)
-        return Pager(PagingConfig(pageSize = 20)) {
+        return Pager(pagingConfig) {
             pagingSource
         }.flow
     }

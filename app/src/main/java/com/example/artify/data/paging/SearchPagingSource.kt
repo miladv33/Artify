@@ -50,7 +50,7 @@ class SearchPagingSource @Inject constructor(
         }
     }
 
-    fun getFirstPage(searchResult: Result<SearchResult>?): List<Int>? {
+    private fun getFirstPage(searchResult: Result<SearchResult>?): List<Int>? {
         val subList = searchResult?.getOrNull()?.objectIDs?.subList(0, 20)
         searchResult?.getOrNull()?.objectIDs = searchResult?.getOrNull()?.objectIDs?.drop(20)?: arrayListOf()
         return subList

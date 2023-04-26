@@ -17,6 +17,7 @@ import androidx.lifecycle.asFlow
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.example.artify.presentation.SearchViewModel
+import com.example.artify.ui.Home
 import com.example.artify.ui.theme.ArtifyTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    TestToSee()
+                    Home()
                 }
             }
         }
@@ -39,28 +40,5 @@ class MainActivity : ComponentActivity() {
 }
 
 
-@Composable
-fun TestToSee(searchViewModel: SearchViewModel = hiltViewModel()) {
-    if (searchViewModel.searchResult.value == null) {
-        searchViewModel.search("Iran")
-    }
-    val lazyPagingItems = searchViewModel.searchResult.asFlow().collectAsLazyPagingItems()
-    LazyColumn {
-        items(lazyPagingItems) { item ->
-            Text(text = item.toString(), color = Color.Red)
-        }
-    }
-}
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    ArtifyTheme {
-        Greeting("Android")
-    }
-}
