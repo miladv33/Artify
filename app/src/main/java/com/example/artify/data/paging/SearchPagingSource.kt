@@ -2,15 +2,11 @@ package com.example.artify.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.artify.data.SearchRepository
 import com.example.artify.data.enum.Error
 import com.example.artify.data.map.mappers.SearchedMapper
 import com.example.artify.data.remote.MetService
 import com.example.artify.model.base.CustomException
 import com.example.artify.model.base.SearchResult
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedInject
-import com.squareup.inject.assisted.AssistedInject.Factory
 import javax.inject.Inject
 
 class SearchPagingSource @Inject constructor(

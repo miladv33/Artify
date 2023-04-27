@@ -8,6 +8,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -18,9 +19,6 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.asFlow
-import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
 import com.example.artify.R
 import com.example.artify.presentation.SearchViewModel
 import com.example.artify.ui.theme.*
@@ -32,15 +30,46 @@ fun Home(searchViewModel: SearchViewModel = hiltViewModel()) {
 
     ArtifyTheme{
         Column {
-            val lazyPagingItems = searchViewModel.searchResult.asFlow().collectAsLazyPagingItems()
+
+            val lazyPagingItems = searchViewModel.searchResult.observeAsState()
             SearchInput {
-                lazyPagingItems.itemSnapshotList.drop(lazyPagingItems.itemSnapshotList.size)
                 searchViewModel.search("Iran")
             }
+
+//            when {
+//                lazyPagingItems.loadState.refresh is LoadState.Loading -> {
+//                    // Show loading progress bar
+//                }
+//                lazyPagingItems.loadState.append is LoadState.Loading -> {
+//                    // Show loading progress bar at the end of the list
+//                }
+//                lazyPagingItems.loadState.refresh is LoadState.Error -> {
+//                    // Show error message and retry button
+//                    val error = lazyPagingItems.loadState.refresh as LoadState.Error
+//                    Button(onClick = { lazyPagingItems.retry() }) {
+//                        Text(text = "Retry")
+//                    }
+//                    Text(text = error.error.message ?: "Unknown error")
+//                }
+//                lazyPagingItems.loadState.append is LoadState.Error -> {
+//                    // Show error message and retry button at the end of the list
+//                    val error = lazyPagingItems.loadState.append as LoadState.Error
+//                    Button(onClick = { lazyPagingItems.retry() }) {
+//                        Text(text = "Retry")
+//                    }
+//                    Text(text = error.error.message ?: "Unknown error")
+//                }
+//                else->{
+//
+//                }
+//
+//            }
+
             Spacer(modifier = Modifier.size(2.dp))
             LazyColumn {
-                items(lazyPagingItems) { item ->
-                    Text(text = item.toString(), color = Color.Red)
+                items(lazyPagingItems.value?.objectIDs?.size ?: 0) {
+                    lazyPagingItems.value?.objectIDs?.get(it)
+                        ?.let { it1 -> Text(text = it1.toString(), color = Color.Red) }
                 }
             }
         }

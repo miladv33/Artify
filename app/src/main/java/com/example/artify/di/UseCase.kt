@@ -1,8 +1,6 @@
 package com.example.artify.di
 
-import androidx.paging.PagingConfig
-import com.example.artify.data.SearchRepository
-import com.example.artify.data.paging.SearchPagingSource
+import com.example.artify.data.repository.SearchRepository
 import com.example.artify.domain.usecase.SearchUseCaseImpl
 import com.example.artify.domain.usecase.SearchUserCase
 import dagger.Module

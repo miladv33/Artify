@@ -1,13 +1,11 @@
 package com.example.artify
 
-import androidx.paging.Pager
 import androidx.paging.PagingData
-import com.example.artify.data.SearchRepository
+import com.example.artify.data.repository.SearchRepository
 import com.example.artify.data.paging.SearchPagingSource
 import io.mockk.*
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test

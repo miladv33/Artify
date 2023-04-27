@@ -18,4 +18,9 @@ object Mapper {
     fun provideSearchMapper(failedMapperDelegate: FailedMapperDelegateImpl): SearchedMapper {
         return SearchedMapper(failedMapperDelegate)
     }
+
+    @Provides
+    fun provideFailedMapperDelegate(): FailedMapperDelegate {
+        return FailedMapperDelegateImpl()
+    }
 }
