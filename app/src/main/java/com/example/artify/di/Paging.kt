@@ -3,6 +3,7 @@ package com.example.artify.di
 import androidx.paging.PagingConfig
 import com.example.artify.PAGESIZE
 import com.example.artify.data.map.mappers.SearchedMapper
+import com.example.artify.data.paging.PageManger
 import com.example.artify.data.paging.SearchPagingSource
 import com.example.artify.data.paging.SearchQuery
 import com.example.artify.data.remote.MetService
@@ -38,5 +39,11 @@ object Paging {
             pageSize = PAGESIZE, // Number of items to load at once
             enablePlaceholders = false // Disable null placeholders
         )
+    }
+
+    @Singleton
+    @Provides
+    fun providePageManger(): PageManger {
+        return PageManger()
     }
 }

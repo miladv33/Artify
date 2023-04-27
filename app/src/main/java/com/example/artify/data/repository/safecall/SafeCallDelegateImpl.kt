@@ -1,7 +1,6 @@
 package com.example.artify.data.repository.safecall
 
 import com.example.artify.data.map.delegate.failedmap.FailedMapperDelegate
-import com.example.frux.data.repository.safecall.SafeCallDelegate
 
 class SafeCallDelegateImpl(private val failedMapperDelegate: FailedMapperDelegate) : SafeCallDelegate,
     FailedMapperDelegate by failedMapperDelegate {

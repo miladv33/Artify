@@ -1,4 +1,4 @@
-package com.example.frux.data.repository.safecall
+package com.example.artify.data.repository.safecall
 
 interface SafeCallDelegate {
 
