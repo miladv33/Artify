@@ -1,24 +1,10 @@
 package com.example.artify.ui
 
-import android.annotation.SuppressLint
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.keyframes
-import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandIn
-import androidx.compose.animation.shrinkOut
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -28,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -37,68 +22,45 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.artify.R
 import com.example.artify.presentation.SearchViewModel
+import com.example.artify.ui.loading.ArcRotationAnimation
+import com.example.artify.ui.loading.SimpleArcRotation
 import com.example.artify.ui.theme.*
+import kotlinx.coroutines.delay
 
 
-@OptIn(ExperimentalComposeUiApi::class, ExperimentalFoundationApi::class)
+@OptIn( ExperimentalFoundationApi::class)
 @Composable
 fun Home(searchViewModel: SearchViewModel = hiltViewModel()) {
-    val keyboardController = LocalSoftwareKeyboardController.current
-
+    val loadingData = searchViewModel.loadingData.observeAsState()
+    if (loadingData.value == true) {
+        Box(
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth(),
+            contentAlignment = Alignment.Center
+        ) {
+            ArcRotationAnimation()
+        }
+    }
     ArtifyTheme {
         Column {
-
-            val lazyPagingItems = searchViewModel.searchResult
+            val searchedKey = remember {
+                mutableStateOf("")
+            }
             SearchInput {
-                searchViewModel.search("Iran")
+                searchedKey.value = it
+                searchViewModel.search(it)
             }
 
             Spacer(modifier = Modifier.size(2.dp))
-            ListOfNumbers2(query = "Iran")
-
-//            val listState = rememberLazyListState()
-//
-//            LazyColumn(state = listState) {
-//                items(lazyPagingItems.value ?: arrayListOf()) { item ->
-//                    Text(text = item.toString(), color = Color.Red)
-//                }
-//                item {
-//                    LaunchedEffect(true) {
-//                        searchViewModel.search("Iran")
-//                        //Do something when List end has been reached
-//                    }
-//                }
-//            }
-
-        }
-
-
-    }
-}
-
-@Composable
-fun ListOfNumbers(query: String, viewModel: SearchViewModel = hiltViewModel()) {
-    // Observe the viewModel.searchResult as a state
-    val observeAsState by viewModel.searchResult.observeAsState()
-
-    // Launch an effect when the query changes
-    LaunchedEffect(query) {
-        viewModel.search(query)
-    }
-
-    // Display the items using LazyColumn
-    LazyColumn {
-        // Use observeAsState.value as the parameter for items()
-        items(observeAsState as List<Int>) { item ->
-            Text(text = item.toString())
+            ListOfNumbers(query = searchedKey.value)
         }
     }
 }
-
 
 @ExperimentalFoundationApi
 @Composable
-fun ListOfNumbers2(query: String, viewModel: SearchViewModel = hiltViewModel()) {
+fun ListOfNumbers(query: String, viewModel: SearchViewModel = hiltViewModel()) {
     // Observe the search result from the view model
     val searchResult by viewModel.searchResult.observeAsState()
     // Use LazyVerticalGrid to display a grid of items
@@ -113,12 +75,22 @@ fun ListOfNumbers2(query: String, viewModel: SearchViewModel = hiltViewModel()) 
             // Use Text to display the item as a string
             NumberCard(item)
         }
-        item {
-            CircularProgressIndicator(modifier = Modifier.size(12.dp))
-            LaunchedEffect(true) {
-                viewModel.search(query)
+        if (!viewModel.searchResult.value.isNullOrEmpty())
+            item {
+                Box(modifier = Modifier.size(32.dp)) {
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .progressSemantics()
+                            .padding(start = 5.dp)
+                            .size(32.dp), strokeWidth = 1.dp
+                    )
+                }
+                LaunchedEffect(true) {
+                    // This is to confirm that I am using pagination to load the data. just to show you.
+                    delay(500)
+                    viewModel.search(query)
+                }
             }
-        }
     }
 }
 

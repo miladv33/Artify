@@ -1,5 +1,6 @@
 package com.example.artify.presentation
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,13 +21,18 @@ class SearchViewModel @Inject constructor(
     ViewModel(), IPageManger<List<Int>> by pageManger {
     private var _searchResult: MutableLiveData<ArrayList<Int>> = MutableLiveData()
     val searchResult: MutableLiveData<ArrayList<Int>> = _searchResult
+    private val _loadingData: MutableLiveData<Boolean> = MutableLiveData(false)
+    val loadingData: LiveData<Boolean> = _loadingData
 
     fun search(query: String) {
-        if (thereIsCachedData(query)) {
+        if (thereIsCachedData(query.trimEnd())) {
             getCashedData(_searchResult)
         } else {
+            _loadingData.value = true
+            clearResults()
             viewModelScope.launch {
                 searchUserCase.search(query = query).flowOn(Dispatchers.IO).collect {
+                    _loadingData.value = false
                     it.onSuccess { searchResult ->
                         handleSearchSuccess(query, searchResult, _searchResult)
                     }
@@ -36,5 +42,9 @@ class SearchViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    private fun clearResults() {
+        _searchResult.value = ArrayList()
     }
 }
