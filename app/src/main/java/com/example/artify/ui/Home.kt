@@ -11,10 +11,8 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -23,15 +21,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.artify.R
 import com.example.artify.presentation.SearchViewModel
 import com.example.artify.ui.loading.ArcRotationAnimation
-import com.example.artify.ui.loading.SimpleArcRotation
 import com.example.artify.ui.theme.*
 import kotlinx.coroutines.delay
 
 
-@OptIn( ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Home(searchViewModel: SearchViewModel = hiltViewModel()) {
-    val loadingData = searchViewModel.loadingData.observeAsState()
+    val loadingData = searchViewModel.getLoadingLiveData().observeAsState()
     if (loadingData.value == true) {
         Box(
             modifier = Modifier
