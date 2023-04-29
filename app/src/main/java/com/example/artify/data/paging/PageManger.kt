@@ -6,8 +6,8 @@ import com.example.artify.model.base.SearchResult
 class PageManger : IPageManger<List<Int>> {
 
     private var _searchResult: ArrayList<Int>? = null
-    private var searchResult: List<Int>? = _searchResult
-    private var lastQuery: String? = null
+    var searchResult: List<Int>? = _searchResult
+    var lastQuery: String? = null
 
     override fun thereIsCachedData(lastQuery: String): Boolean {
         return this.lastQuery == lastQuery && searchResult != null
@@ -34,10 +34,10 @@ class PageManger : IPageManger<List<Int>> {
             query,
             searchResult.objectIDs
         )
-        getCashedata(_searchResult)
+        getCashedData(_searchResult)
     }
 
-    override fun getCashedata(_searchResult: MutableLiveData<ArrayList<Int>>) {
+    override fun getCashedData(_searchResult: MutableLiveData<ArrayList<Int>>) {
         val newList = ArrayList<Int>() // create a new list
         if (_searchResult.value.isNullOrEmpty()) {
             newList.addAll(

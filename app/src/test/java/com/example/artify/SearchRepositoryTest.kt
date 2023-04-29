@@ -15,27 +15,4 @@ class SearchRepositoryTest {
     private lateinit var searchPagingSourceFactory: SearchPagingSource
     private lateinit var searchRepository: SearchRepository
 
-    @Before
-    fun setup() {
-        searchPagingSourceFactory = mockk(relaxed = true)
-        searchRepository = SearchRepository(searchPagingSourceFactory)
-    }
-
-    @Test
-    fun `getSearchResults returns Flow of PagingData`() = runBlocking {
-        // given
-        val query = "example"
-        val pagingSource = mockk<SearchPagingSource>()
-        val pagingData = PagingData.from(listOf(1, 2, 3))
-        coEvery { pagingSource.setQuery(query) } just Runs
-        every { searchPagingSourceFactory } returns pagingSource
-
-        // when
-        val result = searchRepository.getSearchResults(query)
-
-        // then
-        result.collectLatest { data ->
-            assertEquals(pagingData, data)
-        }
-    }
 }

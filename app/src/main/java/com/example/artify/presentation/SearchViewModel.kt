@@ -1,15 +1,11 @@
 package com.example.artify.presentation
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.artify.data.paging.IPageManger
 import com.example.artify.data.paging.PageManger
 import com.example.artify.domain.usecase.SearchUserCase
-import com.example.artify.model.base.SearchResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
@@ -27,7 +23,7 @@ class SearchViewModel @Inject constructor(
 
     fun search(query: String) {
         if (thereIsCachedData(query)) {
-            getCashedata(_searchResult)
+            getCashedData(_searchResult)
         } else {
             viewModelScope.launch {
                 searchUserCase.search(query = query).flowOn(Dispatchers.IO).collect {
