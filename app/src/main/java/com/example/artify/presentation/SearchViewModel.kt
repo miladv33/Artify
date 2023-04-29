@@ -27,12 +27,12 @@ class SearchViewModel @Inject constructor(
 
     fun search(query: String) {
         if (thereIsCachedData(query)) {
-            getCashedata()
+            getCashedata(_searchResult)
         } else {
             viewModelScope.launch {
                 searchUserCase.search(query = query).flowOn(Dispatchers.IO).collect {
                     it.onSuccess { searchResult ->
-                        handleSearchSuccess(query, searchResult)
+                        handleSearchSuccess(query, searchResult, _searchResult)
                     }
                     it.onFailure {
                         it
@@ -40,30 +40,5 @@ class SearchViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    private fun handleSearchSuccess(query: String, searchResult: SearchResult) {
-        setCachedData(
-            query,
-            searchResult.objectIDs
-        )
-        getCashedata()
-    }
-
-    private fun getCashedata() {
-        val newList = ArrayList<Int>() // create a new list
-        if (_searchResult.value.isNullOrEmpty()) {
-            newList.addAll(
-                getCachedDataFirstPage() ?: emptyList()
-            ) // add the first page to the new list
-        } else {
-            newList.addAll(
-                _searchResult.value ?: emptyList()
-            ) // add the current value to the new list
-            newList.addAll(
-                getCachedDataFirstPage() ?: emptyList()
-            ) // add the next page to the new list
-        }
-        _searchResult.value = newList // assign the new list to the _searchResult.value
     }
 }
