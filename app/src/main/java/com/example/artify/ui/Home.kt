@@ -105,13 +105,20 @@ fun NumberCard(number: Int) {
         // Use AnimatedVisibility to show or hide the card with scale animations
         // Use Card to display the number
         Card(modifier = Modifier.padding(8.dp)) {
-            Text(
-                text = number.toString(),
-                modifier = Modifier.padding(16.dp),
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White
-            )
+            Box(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = number.toString(),
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+            }
+
         }
     }
 }
