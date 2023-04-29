@@ -20,7 +20,7 @@ class PageManger : IPageManger<List<Int>> {
     }
 
     override fun setCachedData(lastQuery: String, data: List<Int>?) {
-        this.lastQuery = lastQuery
+        this.lastQuery = lastQuery.trimEnd()
         this.searchResult = data
     }
 
