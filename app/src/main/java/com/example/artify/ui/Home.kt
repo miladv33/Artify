@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.artify.R
 import com.example.artify.presentation.SearchViewModel
+import com.example.artify.ui.error.Dialog
 import com.example.artify.ui.loading.ArcRotationAnimation
 import com.example.artify.ui.theme.*
 import kotlinx.coroutines.delay
@@ -38,6 +39,10 @@ fun Home(searchViewModel: SearchViewModel = hiltViewModel()) {
         ) {
             ArcRotationAnimation()
         }
+    }
+    val errorState = searchViewModel.getErrorDialogState().observeAsState()
+    if (errorState.value == true) {
+        Dialog(searchViewModel, searchViewModel.getErrorMessage())
     }
     ArtifyTheme {
         Column {

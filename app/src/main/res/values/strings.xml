@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Artify</string>
     <string name="search">Type what you want to see</string>
+    <string name="dismiss">dismiss</string>
 </resources>

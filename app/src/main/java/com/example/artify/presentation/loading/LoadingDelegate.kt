@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 
-class Loading : ILoading {
+class LoadingDelegate : ILoading {
     private val _loadingData: MutableLiveData<Boolean> = MutableLiveData(false)
 
     override fun showLoading() {
