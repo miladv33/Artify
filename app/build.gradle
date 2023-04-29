@@ -149,4 +149,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_version")
     testImplementation 'org.mockito:mockito-inline:4.0.0'
     testImplementation "io.mockk:mockk:$mockkVersion"
+
+    implementation "androidx.compose.animation:animation:$compose_version"
+
 }

@@ -12,10 +12,10 @@ class PageManger : IPageManger<List<Int>> {
         return this.lastQuery == lastQuery && searchResult != null
     }
 
-    override fun getCachedDataFirstPage(): SearchResult? {
-        val result = searchResult?.take(20)
+    override fun getCachedDataFirstPage(): List<Int>? {
+        val result = searchResult?.take(40)
         result?.let { _searchResult?.removeAll(it) }
-        return result?.let { SearchResult(it) }
+        return result
     }
 
     override fun setCachedData(lastQuery: String, data: List<Int>?) {
