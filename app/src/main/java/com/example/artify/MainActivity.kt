@@ -9,6 +9,7 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.example.artify.ui.DetailScreen
 import com.example.artify.ui.Home
+import com.example.artify.ui.MyApp
 import com.example.artify.ui.theme.ArtifyTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,8 +24,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    DetailScreen()
-//                    Home()
+                    MyApp()
                 }
             }
         }

@@ -26,10 +26,12 @@ class SearchViewModel @Inject constructor(
     ShowErrorDelegate by showErrorDelegate {
     private var _searchResult: MutableLiveData<ArrayList<Int>> = MutableLiveData()
     val searchResult: MutableLiveData<ArrayList<Int>> = _searchResult
+    var lastSearch = ""
     fun search(query: String) {
         if (thereIsCachedData(query.trimEnd())) {
             getCashedData(_searchResult)
         } else {
+            lastSearch = query
             showLoading()
             clearResults()
             viewModelScope.launch {

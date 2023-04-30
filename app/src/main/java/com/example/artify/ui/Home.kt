@@ -28,7 +28,7 @@ import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun Home(searchViewModel: SearchViewModel = hiltViewModel()) {
+fun Home(searchViewModel: SearchViewModel = hiltViewModel(), onItemClick: (Int) -> Unit) {
     val loadingData = searchViewModel.getLoadingLiveData().observeAsState()
     if (loadingData.value == true) {
         Box(
@@ -47,7 +47,7 @@ fun Home(searchViewModel: SearchViewModel = hiltViewModel()) {
     ArtifyTheme {
         Column {
             val searchedKey = remember {
-                mutableStateOf("")
+                mutableStateOf(searchViewModel.lastSearch)
             }
             SearchInput {
                 searchedKey.value = it
@@ -55,14 +55,18 @@ fun Home(searchViewModel: SearchViewModel = hiltViewModel()) {
             }
 
             Spacer(modifier = Modifier.size(2.dp))
-            ListOfNumbers(query = searchedKey.value)
+            ListOfNumbers(query = searchedKey.value, onItemClick)
         }
     }
 }
 
 @ExperimentalFoundationApi
 @Composable
-fun ListOfNumbers(query: String, viewModel: SearchViewModel = hiltViewModel()) {
+fun ListOfNumbers(
+    query: String,
+    onItemClick: (Int) -> Unit,
+    viewModel: SearchViewModel = hiltViewModel()
+) {
     // Observe the search result from the view model
     val searchResult by viewModel.searchResult.observeAsState()
     // Use LazyVerticalGrid to display a grid of items
@@ -75,7 +79,7 @@ fun ListOfNumbers(query: String, viewModel: SearchViewModel = hiltViewModel()) {
             searchResult ?: emptyList()
         ) { index, item ->
             // Use Text to display the item as a string
-            NumberCard(item)
+            NumberCard(item, onItemClick)
         }
         if (!viewModel.searchResult.value.isNullOrEmpty())
             item {
@@ -97,11 +101,12 @@ fun ListOfNumbers(query: String, viewModel: SearchViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun NumberCard(number: Int) {
+fun NumberCard(number: Int, onItemClick: (Int) -> Unit) {
     // Use a mutable state to store the visibility of the card
-    var visible by remember { mutableStateOf(true) }
     // Use Modifier.clickable to handle the click event
-    Box(modifier = Modifier.clickable { visible = !visible }) {
+    Box(modifier = Modifier.clickable {
+        onItemClick.invoke(number)
+    }) {
         // Use AnimatedVisibility to show or hide the card with scale animations
         // Use Card to display the number
         Card(modifier = Modifier.padding(8.dp)) {
