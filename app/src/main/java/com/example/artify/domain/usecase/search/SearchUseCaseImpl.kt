@@ -1,4 +1,4 @@
-package com.example.artify.domain.usecase
+package com.example.artify.domain.usecase.search
 
 import com.example.artify.data.repository.SearchRepository
 import dagger.Module

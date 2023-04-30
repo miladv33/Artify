@@ -1,4 +1,4 @@
-package com.example.artify.domain.usecase
+package com.example.artify.domain.usecase.search
 
 import com.example.artify.data.model.SearchResult
 import kotlinx.coroutines.flow.Flow

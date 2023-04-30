@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.artify.data.paging.IPageManger
 import com.example.artify.data.paging.PageManger
-import com.example.artify.domain.usecase.SearchUserCase
+import com.example.artify.domain.usecase.search.SearchUserCase
 import com.example.artify.presentation.error.ShowErrorDelegate
 import com.example.artify.presentation.loading.ILoading
 import com.example.artify.presentation.loading.LoadingDelegate
