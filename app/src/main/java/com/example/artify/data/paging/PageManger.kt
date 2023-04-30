@@ -5,7 +5,7 @@ import com.example.artify.data.model.SearchResult
 
 class PageManger : IPageManger<List<Int>> {
 
-    private var _searchResult: ArrayList<Int>? = null
+    private var _searchResult: ArrayList<Int>? = ArrayList()
     var searchResult: List<Int>? = _searchResult
     var lastQuery: String? = null
 
@@ -15,13 +15,17 @@ class PageManger : IPageManger<List<Int>> {
 
     override fun getCachedDataFirstPage(): List<Int>? {
         val result = searchResult?.take(40)
-        result?.let { _searchResult?.removeAll(it) }
+        result?.let {
+            _searchResult?.removeAll(result)
+        }
         return result
     }
 
     override fun setCachedData(lastQuery: String, data: List<Int>?) {
         this.lastQuery = lastQuery.trimEnd()
-        this.searchResult = data
+        if (data != null) {
+            this._searchResult?.addAll(data)
+        }
     }
 
 
