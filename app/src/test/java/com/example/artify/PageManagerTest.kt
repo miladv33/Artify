@@ -1,11 +1,6 @@
 package com.example.artify
 
-import androidx.lifecycle.MutableLiveData
 import com.example.artify.data.paging.PageManger
-import com.example.artify.model.base.SearchResult
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.verify
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

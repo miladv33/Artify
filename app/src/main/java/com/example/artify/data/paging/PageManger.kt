@@ -1,7 +1,7 @@
 package com.example.artify.data.paging
 
 import androidx.lifecycle.MutableLiveData
-import com.example.artify.model.base.SearchResult
+import com.example.artify.data.model.SearchResult
 
 class PageManger : IPageManger<List<Int>> {
 

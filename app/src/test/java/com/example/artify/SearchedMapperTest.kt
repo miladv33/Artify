@@ -3,8 +3,8 @@ package com.example.artify
 import com.example.artify.data.map.delegate.failedmap.FailedMapperDelegateImpl
 import com.example.artify.data.map.mappers.SearchedMapper
 import com.example.artify.data.remote.dto.SearchResultDTO
-import com.example.artify.model.base.CustomException
-import com.example.artify.model.base.SearchResult
+import com.example.artify.data.model.CustomException
+import com.example.artify.data.model.SearchResult
 import io.mockk.every
 import io.mockk.spyk
 import io.mockk.verify

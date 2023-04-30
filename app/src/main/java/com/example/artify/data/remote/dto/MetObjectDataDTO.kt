@@ -1,6 +1,6 @@
 package com.example.artify.data.remote.dto
 
-data class MetObjectDTO(
+data class MetObjectDataDTO(
     val GalleryNumber: String,
     val accessionNumber: String,
     val accessionYear: String,
@@ -19,7 +19,7 @@ data class MetObjectDTO(
     val artistWikidata_URL: String,
     val city: String,
     val classification: String,
-    val constituents: List<ConstituentDTO>,
+    val constituents: List<Constituent>,
     val country: String,
     val county: String,
     val creditLine: String,
@@ -35,7 +35,7 @@ data class MetObjectDTO(
     val linkResource: String,
     val locale: String,
     val locus: String,
-    val measurements: Any,
+    val measurements: List<Measurement>,
     val medium: String,
     val metadataDate: String,
     val objectBeginDate: Int,
@@ -56,6 +56,6 @@ data class MetObjectDTO(
     val river: String,
     val state: String,
     val subregion: String,
-    val tags: Any,
+    val tags: List<Tag>,
     val title: String
 )

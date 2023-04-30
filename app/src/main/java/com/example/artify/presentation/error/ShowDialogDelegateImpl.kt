@@ -2,7 +2,7 @@ package com.example.artify.presentation.error
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.artify.model.base.CustomException
+import com.example.artify.data.model.CustomException
 import com.example.artify.data.enum.Error
 class ShowDialogDelegateImpl : ShowErrorDelegate {
     /**

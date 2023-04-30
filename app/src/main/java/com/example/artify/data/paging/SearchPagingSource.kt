@@ -5,8 +5,8 @@ import androidx.paging.PagingState
 import com.example.artify.data.enum.Error
 import com.example.artify.data.map.mappers.SearchedMapper
 import com.example.artify.data.remote.MetService
-import com.example.artify.model.base.CustomException
-import com.example.artify.model.base.SearchResult
+import com.example.artify.data.model.CustomException
+import com.example.artify.data.model.SearchResult
 import javax.inject.Inject
 
 class SearchPagingSource @Inject constructor(

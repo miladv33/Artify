@@ -1,9 +1,7 @@
 package com.example.artify.data.remote
 
-import android.app.appsearch.SearchResult
-import com.example.artify.data.remote.dto.MetObjectDTO
+import com.example.artify.data.remote.dto.MetObjectDataDTO
 import com.example.artify.data.remote.dto.SearchResultDTO
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,5 +14,5 @@ interface MetService {
 
     // Get the details of an object by its ID
     @GET("/public/collection/v1/objects/{id}")
-    suspend fun getObject(@Path("id") id: Int): Response<MetObjectDTO?>?
+    suspend fun getObject(@Path("id") id: Int): Response<MetObjectDataDTO?>?
 }

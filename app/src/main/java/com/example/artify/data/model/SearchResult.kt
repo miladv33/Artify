@@ -1,4 +1,4 @@
-package com.example.artify.model.base
+package com.example.artify.data.model
 
 data class SearchResult(
     var objectIDs: List<Int>

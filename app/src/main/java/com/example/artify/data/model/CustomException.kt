@@ -1,4 +1,4 @@
-package com.example.artify.model.base
+package com.example.artify.data.model
 
 import com.example.artify.data.enum.Error
 

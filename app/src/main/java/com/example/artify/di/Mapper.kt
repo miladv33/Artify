@@ -2,6 +2,7 @@ package com.example.artify.di
 
 import com.example.artify.data.map.delegate.failedmap.FailedMapperDelegate
 import com.example.artify.data.map.delegate.failedmap.FailedMapperDelegateImpl
+import com.example.artify.data.map.mappers.ObjectDataMapper
 import com.example.artify.data.map.mappers.SearchedMapper
 import dagger.Module
 import dagger.Provides
@@ -22,5 +23,11 @@ object Mapper {
     @Provides
     fun provideFailedMapperDelegate(): FailedMapperDelegate {
         return FailedMapperDelegateImpl()
+    }
+
+    @Singleton
+    @Provides
+    fun provideObjectDataMapper(failedMapperDelegateImpl: FailedMapperDelegateImpl): ObjectDataMapper {
+        return ObjectDataMapper(failedMapperDelegateImpl)
     }
 }

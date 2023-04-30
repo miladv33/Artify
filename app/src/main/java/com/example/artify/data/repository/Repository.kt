@@ -1,9 +1,6 @@
 package com.example.artify.data.repository
 
-import com.example.artify.data.paging.SearchQuery
-import com.example.artify.data.remote.dto.SearchResultDTO
-import com.example.artify.model.base.SearchResult
-import kotlinx.coroutines.flow.Flow
+import com.example.artify.data.model.SearchResult
 
 interface Repository {
 

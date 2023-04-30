@@ -1,4 +1,4 @@
-package com.example.artify.model.base
+package com.example.artify.data.model
 
 /**
  * THe base class Model. This is because mappers need a model to work with.
