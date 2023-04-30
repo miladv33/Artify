@@ -22,6 +22,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
 import com.example.artify.data.model.MetObjectData
 import com.example.artify.presentation.DetailViewModel
+import com.example.artify.ui.Common.CustomImage
 import com.example.artify.ui.error.Dialog
 import com.example.artify.ui.loading.ArcRotationAnimation
 
@@ -52,26 +53,18 @@ fun DetailScreen(objectID: Int = 437133, detailViewModel: DetailViewModel = hilt
         val data = detailViewModel.metObjectResult.value!!
         Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
             // Display the primary image
-            Image(
-                painter = rememberImagePainter(data.primaryImage),
-                contentDescription = data.title,
-                modifier = Modifier
+            CustomImage(
+                data.primaryImage, modifier = Modifier
                     .fillMaxWidth()
-//                .aspectRatio(data.primaryImageAspectRatio)
-                ,
-                contentScale = ContentScale.Crop
             )
             // Display the additional images gallery, if available
             if (data.additionalImages.isNotEmpty()) {
                 LazyRow(modifier = Modifier.padding(8.dp)) {
                     items(data.additionalImages) { imageUrl ->
-                        Image(
-                            painter = rememberImagePainter(imageUrl),
-                            contentDescription = null,
-                            modifier = Modifier
+                        CustomImage(
+                            imageUrl, modifier = Modifier
                                 .size(120.dp)
-                                .padding(4.dp),
-                            contentScale = ContentScale.Crop
+                                .padding(4.dp)
                         )
                     }
                 }
