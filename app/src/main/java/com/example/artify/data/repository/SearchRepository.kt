@@ -14,7 +14,6 @@ class SearchRepository @Inject constructor(
 ) : Repository.SearchRepository, SafeCallDelegate by safeCallDelegate {
     override suspend fun getSearchResults(query: String) = safeCall {
         val searchObjects = apiService.searchObjects(query)
-        val map = mapper.map(searchObjects)
-        map
+        mapper.map(searchObjects)
     }
 }

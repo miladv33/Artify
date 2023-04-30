@@ -14,5 +14,5 @@ interface MetService {
 
     // Get the details of an object by its ID
     @GET("/public/collection/v1/objects/{id}")
-    suspend fun getObject(@Path("id") id: Int): Response<MetObjectDataDTO?>?
+    suspend fun getObject(@Path("id") id: Int): Response<MetObjectDataDTO>?
 }
