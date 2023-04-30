@@ -27,7 +27,10 @@ object UseCase {
 
     @Singleton
     @Provides
-    fun provideMetObjectUseCase(metObjectDataRepository: MetObjectDataRepository): MetObjectUseCase {
+    fun provideMetObjectUseCase(
+        metObjectDataRepository:
+        MetObjectDataRepository
+    ): MetObjectUseCase {
         return MetObjectUseCaseImpl(metObjectDataRepository)
     }
 }
