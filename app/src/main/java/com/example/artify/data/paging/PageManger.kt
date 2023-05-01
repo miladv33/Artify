@@ -9,7 +9,7 @@ class PageManger : IPageManger<List<Int>> {
     var searchResult: List<Int>? = _searchResult
     var lastQuery: String? = null
 
-    override fun thereIsCachedData(lastQuery: String): Boolean {
+    override fun hasCachedData(lastQuery: String): Boolean {
         return this.lastQuery == lastQuery && searchResult != null
     }
 
@@ -38,10 +38,10 @@ class PageManger : IPageManger<List<Int>> {
             query,
             searchResult.objectIDs
         )
-        getCashedData(_searchResult)
+        loadCachedData(_searchResult)
     }
 
-    override fun getCashedData(_searchResult: MutableLiveData<ArrayList<Int>>) {
+    override fun loadCachedData(_searchResult: MutableLiveData<ArrayList<Int>>) {
         val newList = ArrayList<Int>() // create a new list
         if (_searchResult.value.isNullOrEmpty()) {
             newList.addAll(

@@ -1,6 +1,5 @@
 package com.example.artify.ui
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -16,36 +15,25 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.rememberImagePainter
-import com.example.artify.data.model.MetObjectData
 import com.example.artify.presentation.DetailViewModel
+import com.example.artify.presentation.error.ShowErrorDelegate
+import com.example.artify.presentation.loading.ILoading
+import com.example.artify.presentation.loading.LoadingDelegate
 import com.example.artify.ui.Common.CustomImage
+import com.example.artify.ui.Common.ErrorIndicator
+import com.example.artify.ui.Common.LoadingIndicator
 import com.example.artify.ui.error.Dialog
 import com.example.artify.ui.loading.ArcRotationAnimation
 import com.example.artify.ui.theme.MainImageSize
+import com.example.artify.ui.theme.defaultSpacing
+import com.example.artify.ui.theme.loadingImageSize
+import com.example.artify.ui.theme.smallSpacing
 
 @Composable
 fun DetailScreen(objectID: Int, detailViewModel: DetailViewModel = hiltViewModel()) {
-    val loadingData = detailViewModel.getLoadingLiveData().observeAsState()
-    if (loadingData.value == true) {
-        Box(
-            modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ) {
-            ArcRotationAnimation()
-        }
-    }
-    val errorState = detailViewModel.getErrorDialogState().observeAsState()
-    if (errorState.value == true) {
-        Dialog(detailViewModel, detailViewModel.getErrorMessage())
-    }
+    LoadingIndicator(detailViewModel)
+    ErrorIndicator(detailViewModel)
 
     LaunchedEffect(objectID) {
         detailViewModel.getObject(objectID)
@@ -66,12 +54,12 @@ fun DetailScreen(objectID: Int, detailViewModel: DetailViewModel = hiltViewModel
             )
             // Display the additional images gallery, if available
             if (data.additionalImages.isNotEmpty()) {
-                LazyRow(modifier = Modifier.padding(8.dp)) {
+                LazyRow(modifier = Modifier.padding(defaultSpacing)) {
                     item {
                         CustomImage(
                             data.primaryImage, modifier = Modifier
-                                .size(120.dp)
-                                .padding(4.dp)
+                                .size(loadingImageSize)
+                                .padding(smallSpacing)
                                 .clickable {
                                     mainImage.value = data.primaryImage
                                 }
@@ -80,8 +68,8 @@ fun DetailScreen(objectID: Int, detailViewModel: DetailViewModel = hiltViewModel
                     items(data.additionalImages) { imageUrl ->
                         CustomImage(
                             imageUrl, modifier = Modifier
-                                .size(120.dp)
-                                .padding(4.dp)
+                                .size(loadingImageSize)
+                                .padding(smallSpacing)
                                 .clickable {
                                     mainImage.value = imageUrl
                                 }
@@ -92,39 +80,34 @@ fun DetailScreen(objectID: Int, detailViewModel: DetailViewModel = hiltViewModel
             // Display the overview with detailed information
             Text(
                 text = data.title,
-                color = Color.Red,
+                color = MaterialTheme.colors.primary,
                 style = MaterialTheme.typography.h4,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(defaultSpacing)
             )
             Text(
                 text = data.artistDisplayName,
-                color = Color.Red,
+                color = MaterialTheme.colors.primary,
                 style = MaterialTheme.typography.h6,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(defaultSpacing)
             )
             Text(
                 text = data.objectDate,
-                color = Color.Red,
+                color = MaterialTheme.colors.primary,
                 style = MaterialTheme.typography.subtitle1,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(defaultSpacing)
             )
             Text(
                 text = data.department,
-                color = Color.Red,
+                color = MaterialTheme.colors.primary,
                 style = MaterialTheme.typography.subtitle2,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(defaultSpacing)
             )
             Text(
                 text = data.objectName,
-                color = Color.Red,
+                color = MaterialTheme.colors.primary,
                 style = MaterialTheme.typography.body1,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(defaultSpacing)
             )
         }
     }
-}
-
-@Composable
-fun DetailScreen2(objectId: Int) {
-
 }

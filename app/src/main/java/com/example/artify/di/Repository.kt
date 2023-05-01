@@ -18,7 +18,6 @@ import javax.inject.Singleton
 @Module
 object Repository {
 
-
     @Provides
     @Singleton
     fun provideSearchRepository(

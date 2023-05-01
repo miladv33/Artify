@@ -1,5 +1,6 @@
 package com.example.artify.presentation
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -25,24 +26,34 @@ class SearchViewModel @Inject constructor(
     ViewModel(), IPageManger<List<Int>> by pageManger, ILoading by loading,
     ShowErrorDelegate by showErrorDelegate {
     private var _searchResult: MutableLiveData<ArrayList<Int>> = MutableLiveData()
-    val searchResult: MutableLiveData<ArrayList<Int>> = _searchResult
-    var lastSearch = ""
+    val searchResult: LiveData<ArrayList<Int>> = _searchResult
+    var lastSearchQuery = ""
+        private set(value) {
+            field = value
+        }
+
     fun search(query: String) {
-        if (thereIsCachedData(query.trimEnd())) {
-            getCashedData(_searchResult)
-        } else {
-            lastSearch = query
-            showLoading()
-            clearResults()
-            viewModelScope.launch {
-                searchUserCase.search(query = query).flowOn(Dispatchers.IO).collect {
-                    hideLoading()
-                    it.onSuccess { searchResult ->
-                        handleSearchSuccess(query, searchResult, _searchResult)
-                    }
-                    it.onFailure { throwable ->
-                        onFailure(throwable)
-                    }
+        query.trimEnd().let { trimmedQuery ->
+            if (hasCachedData(trimmedQuery)) {
+                loadCachedData(_searchResult)
+            } else {
+                performSearch(trimmedQuery)
+            }
+        }
+    }
+
+    private fun performSearch(query: String) {
+        lastSearchQuery = query
+        clearResults()
+        showLoading()
+        viewModelScope.launch {
+            searchUserCase.search(query = query).flowOn(Dispatchers.IO).collect {
+                hideLoading()
+                it.onSuccess { searchResult ->
+                    handleSearchSuccess(query, searchResult, _searchResult)
+                }
+                it.onFailure { throwable ->
+                    onFailure(throwable)
                 }
             }
         }

@@ -20,6 +20,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.artify.R
 import com.example.artify.presentation.SearchViewModel
+import com.example.artify.ui.Common.ErrorIndicator
+import com.example.artify.ui.Common.LoadingIndicator
 import com.example.artify.ui.error.Dialog
 import com.example.artify.ui.loading.ArcRotationAnimation
 import com.example.artify.ui.theme.*
@@ -29,34 +31,19 @@ import kotlinx.coroutines.delay
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Home(searchViewModel: SearchViewModel = hiltViewModel(), onItemClick: (Int) -> Unit) {
-    val loadingData = searchViewModel.getLoadingLiveData().observeAsState()
-    if (loadingData.value == true) {
-        Box(
-            modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ) {
-            ArcRotationAnimation()
+    LoadingIndicator(searchViewModel)
+    ErrorIndicator(searchViewModel)
+    Column {
+        val searchedKey = remember {
+            mutableStateOf(searchViewModel.lastSearchQuery)
         }
-    }
-    val errorState = searchViewModel.getErrorDialogState().observeAsState()
-    if (errorState.value == true) {
-        Dialog(searchViewModel, searchViewModel.getErrorMessage())
-    }
-    ArtifyTheme {
-        Column {
-            val searchedKey = remember {
-                mutableStateOf(searchViewModel.lastSearch)
-            }
-            SearchInput {
-                searchedKey.value = it
-                searchViewModel.search(it)
-            }
+        SearchInput {
+            searchedKey.value = it
+            searchViewModel.search(it)
+        }
 
-            Spacer(modifier = Modifier.size(2.dp))
-            ListOfNumbers(query = searchedKey.value, onItemClick)
-        }
+        Spacer(modifier = Modifier.size(2.dp))
+        ListOfNumbers(query = searchedKey.value, onItemClick)
     }
 }
 

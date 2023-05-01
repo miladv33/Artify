@@ -20,7 +20,7 @@ class ObjectDataMapper @Inject constructor(
             department = dto.department,
             objectName = dto.objectName,
             primaryImage = dto.primaryImage,
-            additionalImages = dto.additionalImages.filterIsInstance<String>()
+            additionalImages = dto.additionalImages
         )
     }
 }

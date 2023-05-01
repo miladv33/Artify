@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.artify.data.model.SearchResult
 
 interface IPageManger<T> {
-    fun thereIsCachedData(lastQuery: String): Boolean
+    fun hasCachedData(lastQuery: String): Boolean
     fun getCachedDataFirstPage(): T?
     fun setCachedData(lastQuery: String, data: T?)
     fun handleSearchSuccess(
@@ -12,5 +12,5 @@ interface IPageManger<T> {
         searchResult: SearchResult,
         _searchResult: MutableLiveData<ArrayList<Int>>
     )
-    fun getCashedData(_searchResult: MutableLiveData<ArrayList<Int>>)
+    fun loadCachedData(_searchResult: MutableLiveData<ArrayList<Int>>)
 }

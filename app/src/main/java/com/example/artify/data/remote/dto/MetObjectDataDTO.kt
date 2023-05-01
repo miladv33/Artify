@@ -4,7 +4,7 @@ data class MetObjectDataDTO(
     val GalleryNumber: String,
     val accessionNumber: String,
     val accessionYear: String,
-    val additionalImages: List<Any>,
+    val additionalImages: List<String>,
     val artistAlphaSort: String,
     val artistBeginDate: String,
     val artistDisplayBio: String,

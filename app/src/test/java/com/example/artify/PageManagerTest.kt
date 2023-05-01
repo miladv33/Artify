@@ -20,7 +20,7 @@ class PageManagerTest {
         val data = listOf(1, 2, 3)
         pageManager.setCachedData(lastQuery, data)
 
-        val result = pageManager.thereIsCachedData(lastQuery)
+        val result = pageManager.hasCachedData(lastQuery)
 
         assertEquals(true, result)
     }
@@ -31,9 +31,9 @@ class PageManagerTest {
         val data = listOf(1, 2, 3)
         pageManager.setCachedData(lastQuery, data)
 
-        assertEquals(false, pageManager.thereIsCachedData("other"))
+        assertEquals(false, pageManager.hasCachedData("other"))
         pageManager.setCachedData(lastQuery, null)
-        assertEquals(false, pageManager.thereIsCachedData(lastQuery))
+        assertEquals(false, pageManager.hasCachedData(lastQuery))
     }
 
 

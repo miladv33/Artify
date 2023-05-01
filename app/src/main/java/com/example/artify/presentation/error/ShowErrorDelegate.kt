@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 
 interface ShowErrorDelegate {
     fun onFailure(throwable: Throwable)
-
     fun showDialog()
 
     fun hideDialog()
