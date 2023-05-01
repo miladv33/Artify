@@ -32,8 +32,21 @@ import com.example.artify.ui.theme.smallSpacing
 
 @Composable
 fun DetailScreen(objectID: Int, detailViewModel: DetailViewModel = hiltViewModel()) {
-    LoadingIndicator(detailViewModel)
-    ErrorIndicator(detailViewModel)
+    val loadingData = detailViewModel.getLoadingLiveData().observeAsState()
+    if (loadingData.value == true) {
+        Box(
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth(),
+            contentAlignment = Alignment.Center
+        ) {
+            ArcRotationAnimation()
+        }
+    }
+    val errorState = detailViewModel.getErrorDialogState().observeAsState()
+    if (errorState.value == true) {
+        Dialog(detailViewModel, detailViewModel.getErrorMessage())
+    }
 
     LaunchedEffect(objectID) {
         detailViewModel.getObject(objectID)

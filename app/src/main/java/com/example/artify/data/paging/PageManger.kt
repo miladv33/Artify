@@ -29,18 +29,6 @@ class PageManger : IPageManger<List<Int>> {
     }
 
 
-    override fun handleSearchSuccess(
-        query: String,
-        searchResult: SearchResult,
-        _searchResult: MutableLiveData<ArrayList<Int>>
-    ) {
-        setCachedData(
-            query,
-            searchResult.objectIDs
-        )
-        loadCachedData()
-    }
-
     override fun loadCachedData(): Result<SearchResult> {
         val newList = ArrayList<Int>() // create a new list
         newList.addAll(

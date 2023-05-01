@@ -7,10 +7,5 @@ interface IPageManger<T> {
     fun hasCachedData(lastQuery: String): Boolean
     fun getCachedDataFirstPage(): T?
     fun setCachedData(lastQuery: String, data: T?)
-    fun handleSearchSuccess(
-        query: String,
-        searchResult: SearchResult,
-        _searchResult: MutableLiveData<ArrayList<Int>>
-    )
     fun loadCachedData(): Result<SearchResult>
 }

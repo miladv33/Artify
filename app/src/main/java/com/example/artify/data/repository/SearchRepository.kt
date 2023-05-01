@@ -19,9 +19,7 @@ class SearchRepository @Inject constructor(
             val searchObjects = apiService.searchObjects(query)
             val result = mapper.map(searchObjects)
             pageManger.setCachedData(query, result.getOrNull()?.objectIDs)
-            pageManger.loadCachedData()
-        } else {
-            pageManger.loadCachedData()
         }
+        pageManger.loadCachedData()
     }
 }
