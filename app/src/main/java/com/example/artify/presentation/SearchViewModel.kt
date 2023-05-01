@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.artify.data.model.SearchResult
 import com.example.artify.data.paging.IPageManger
 import com.example.artify.data.paging.PageManger
 import com.example.artify.domain.usecase.search.SearchUserCase
@@ -19,38 +20,32 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val searchUserCase: SearchUserCase,
-    private val pageManger: PageManger,
     private val loading: LoadingDelegate,
     private val showErrorDelegate: ShowErrorDelegate
 ) :
-    ViewModel(), IPageManger<List<Int>> by pageManger, ILoading by loading,
+    ViewModel(), ILoading by loading,
     ShowErrorDelegate by showErrorDelegate {
-    private var _searchResult: MutableLiveData<ArrayList<Int>> = MutableLiveData()
+    private var _searchResult: MutableLiveData<ArrayList<Int>> = MutableLiveData(ArrayList())
     val searchResult: LiveData<ArrayList<Int>> = _searchResult
+    private var objectList = ArrayList<Int>()
+
     var lastSearchQuery = ""
         private set(value) {
             field = value
         }
 
     fun search(query: String) {
-        query.trimEnd().let { trimmedQuery ->
-            if (hasCachedData(trimmedQuery)) {
-                loadCachedData(_searchResult)
-            } else {
-                performSearch(trimmedQuery)
-            }
-        }
+        performSearch(query.trimEnd())
     }
 
     private fun performSearch(query: String) {
         lastSearchQuery = query
-        clearResults()
         showLoading()
         viewModelScope.launch {
             searchUserCase.search(query = query).flowOn(Dispatchers.IO).collect {
                 hideLoading()
                 it.onSuccess { searchResult ->
-                    handleSearchSuccess(query, searchResult, _searchResult)
+                    handleSuccessResult(searchResult)
                 }
                 it.onFailure { throwable ->
                     onFailure(throwable)
@@ -59,7 +54,16 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    private fun clearResults() {
+    private fun handleSuccessResult(searchResult: SearchResult) {
+        val newList = ArrayList<Int>()
+        newList.addAll(objectList)
+        newList.addAll(searchResult.objectIDs)
+        objectList = newList
+        _searchResult.value = newList
+    }
+
+    fun clearResults() {
+        objectList.clear()
         _searchResult.value = ArrayList()
     }
 }

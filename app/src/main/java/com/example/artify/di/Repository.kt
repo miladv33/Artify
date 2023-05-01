@@ -23,9 +23,10 @@ object Repository {
     fun provideSearchRepository(
         metService: MetService,
         mapper: SearchedMapper,
-        safeCallDelegate: SafeCallDelegateImpl
+        safeCallDelegate: SafeCallDelegateImpl,
+        pageManger: PageManger
     ): SearchRepository {
-        return SearchRepository(metService, mapper, safeCallDelegate)
+        return SearchRepository(metService, mapper, safeCallDelegate, pageManger)
     }
 
     @Provides

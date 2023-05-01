@@ -12,5 +12,5 @@ interface IPageManger<T> {
         searchResult: SearchResult,
         _searchResult: MutableLiveData<ArrayList<Int>>
     )
-    fun loadCachedData(_searchResult: MutableLiveData<ArrayList<Int>>)
+    fun loadCachedData(): Result<SearchResult>
 }

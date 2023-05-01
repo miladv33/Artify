@@ -39,6 +39,7 @@ fun Home(searchViewModel: SearchViewModel = hiltViewModel(), onItemClick: (Int) 
         }
         SearchInput {
             searchedKey.value = it
+            searchViewModel.clearResults()
             searchViewModel.search(it)
         }
 
@@ -54,18 +55,13 @@ fun ListOfNumbers(
     onItemClick: (Int) -> Unit,
     viewModel: SearchViewModel = hiltViewModel()
 ) {
-    // Observe the search result from the view model
     val searchResult by viewModel.searchResult.observeAsState()
-    // Use LazyVerticalGrid to display a grid of items
     LazyVerticalGrid(
-        // Specify 3 columns for the grid
         GridCells.Fixed(3)
     ) {
-        // Use itemsIndexed to get the index and item of each element in the list
         itemsIndexed(
             searchResult ?: emptyList()
         ) { index, item ->
-            // Use Text to display the item as a string
             NumberCard(item, onItemClick)
         }
         if (!viewModel.searchResult.value.isNullOrEmpty())
@@ -79,7 +75,6 @@ fun ListOfNumbers(
                     )
                 }
                 LaunchedEffect(true) {
-                    // This is to confirm that I am using pagination to load the data. just to show you.
                     delay(500)
                     viewModel.search(query)
                 }
@@ -89,13 +84,9 @@ fun ListOfNumbers(
 
 @Composable
 fun NumberCard(number: Int, onItemClick: (Int) -> Unit) {
-    // Use a mutable state to store the visibility of the card
-    // Use Modifier.clickable to handle the click event
     Box(modifier = Modifier.clickable {
         onItemClick.invoke(number)
     }) {
-        // Use AnimatedVisibility to show or hide the card with scale animations
-        // Use Card to display the number
         Card(modifier = Modifier.padding(8.dp)) {
             Box(
                 modifier = Modifier
@@ -120,10 +111,8 @@ fun NumberCard(number: Int, onItemClick: (Int) -> Unit) {
 fun SearchInput(
     onSearchClick: (value: String) -> Unit
 ) {
-    // Define a shape for the input text with rounded corners
     val shape = Shapes.medium
 
-    // Define and remember a mutable state for the search value
     val searchValue = remember { mutableStateOf("") }
 
     val modifier = Modifier

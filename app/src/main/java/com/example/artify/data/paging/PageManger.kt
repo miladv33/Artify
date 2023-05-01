@@ -38,23 +38,14 @@ class PageManger : IPageManger<List<Int>> {
             query,
             searchResult.objectIDs
         )
-        loadCachedData(_searchResult)
+        loadCachedData()
     }
 
-    override fun loadCachedData(_searchResult: MutableLiveData<ArrayList<Int>>) {
+    override fun loadCachedData(): Result<SearchResult> {
         val newList = ArrayList<Int>() // create a new list
-        if (_searchResult.value.isNullOrEmpty()) {
-            newList.addAll(
-                getCachedDataFirstPage() ?: emptyList()
-            ) // add the first page to the new list
-        } else {
-            newList.addAll(
-                _searchResult.value ?: emptyList()
-            ) // add the current value to the new list
-            newList.addAll(
-                getCachedDataFirstPage() ?: emptyList()
-            ) // add the next page to the new list
-        }
-        _searchResult.value = newList // assign the new list to the _searchResult.value
+        newList.addAll(
+            getCachedDataFirstPage() ?: emptyList()
+        )
+        return Result.success(SearchResult(newList))
     }
 }
