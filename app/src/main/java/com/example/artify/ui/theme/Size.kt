@@ -17,7 +17,7 @@ val loadingImageSize = 100.dp
 val loadingHeight = 150.dp
 val cardImageHeight = 200.dp
 val ButtonSheetHeight = 400.dp
-val dialogueWidth = 300.dp
+val MainImageSize = 400.dp
 
 val FONT_SIZE_H5 = 18.sp
 val FONT_SIZE_SUBTITLE1 = 14.sp
