@@ -37,7 +37,6 @@ fun SearchScreen(searchViewModel: SearchViewModel = hiltViewModel(), onItemClick
         }
         SearchInput {
             searchedKey.value = it
-            searchViewModel.clearResults()
             searchViewModel.search(it)
         }
 
@@ -74,7 +73,7 @@ fun ListOfNumbers(
                 }
                 LaunchedEffect(true) {
                     delay(150)
-                    viewModel.search(query)
+                    viewModel.search(query, true)
                 }
             }
     }

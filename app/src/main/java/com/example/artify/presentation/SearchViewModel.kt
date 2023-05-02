@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.artify.data.model.SearchResult
-import com.example.artify.data.paging.IPageManger
-import com.example.artify.data.paging.PageManger
 import com.example.artify.domain.usecase.search.SearchUserCase
 import com.example.artify.presentation.error.ShowErrorDelegate
 import com.example.artify.presentation.loading.ILoading
@@ -35,7 +33,9 @@ class SearchViewModel @Inject constructor(
             field = value
         }
 
-    fun search(query: String) {
+    fun search(query: String, loadMoreData: Boolean = false) {
+        if (!loadMoreData && query == lastSearchQuery) return
+        if (!loadMoreData) clearResults()
         performSearch(query.trimEnd())
     }
 
