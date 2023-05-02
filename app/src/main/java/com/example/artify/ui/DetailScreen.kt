@@ -70,6 +70,8 @@ fun DetailScreen(objectID: Int, detailViewModel: DetailViewModel = hiltViewModel
                                     mainImage.value = data.primaryImage
                                 }
                         )
+
+
                     }
                     items(data.additionalImages) { imageUrl ->
                         CustomImage(

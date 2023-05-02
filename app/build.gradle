@@ -64,7 +64,6 @@ dependencies {
     implementation "androidx.compose.ui:ui:$compose_ui_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
     implementation 'androidx.compose.material:material:1.2.0'
-    implementation "androidx.paging:paging-compose:1.0.0-alpha17"
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.junit.jupiter:junit-jupiter'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -94,22 +93,10 @@ dependencies {
     kaptTest "com.google.dagger:hilt-android-compiler:$hilt_version"
     implementation "com.squareup.inject:assisted-inject-annotations-dagger2:0.6.0"
 
-
-    //robolectric
-    testImplementation "org.robolectric:robolectric:$robolectric_version"
-
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
     // GSON
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
-
-    //make test flow easy
-    testImplementation "app.cash.turbine:turbine:$turbine_version"
-    //make test livedata easy
-    testImplementation "com.jraska.livedata:testing-ktx:$jraska_livedata_version"
-
-    //lot better testing assertion than default junit assertion
-    testImplementation "com.google.truth:truth:$google_truth_version"
 
     // mockito
     testImplementation "org.mockito:mockito-core:$mockito_core_version"
@@ -119,15 +106,6 @@ dependencies {
 
     //add observer as state
     implementation "androidx.compose.runtime:runtime-livedata:$compose_runtime_version"
-
-    //room
-    kapt "androidx.room:room-compiler:$roomVersion"
-    implementation "androidx.room:room-runtime:$roomVersion"
-    implementation "androidx.room:room-ktx:$roomVersion"
-
-    //work manager
-    implementation "androidx.work:work-runtime-ktx:$workVersion"
-    androidTestImplementation "androidx.work:work-testing:$workVersion"
 
     //compose navigation
     implementation "androidx.navigation:navigation-compose:$nav_version"
