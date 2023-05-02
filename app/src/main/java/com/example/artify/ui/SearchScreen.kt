@@ -93,8 +93,7 @@ fun NumberCard(number: Int, onItemClick: (Int) -> Unit) {
             ) {
                 Text(
                     text = number.toString(),
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.h4,
                     color = MaterialTheme.colors.primary
                 )
             }

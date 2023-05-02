@@ -11,6 +11,7 @@ val loadingImageSize = 120.dp
 val cardImageHeight = 200.dp
 val MainImageSize = 400.dp
 
+val FONT_SIZE_H4 = 16.sp
 val FONT_SIZE_H5 = 18.sp
 val FONT_SIZE_SUBTITLE1 = 12.sp
 val FONT_SIZE_CAPTION = 12.sp
