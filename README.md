@@ -1,4 +1,4 @@
-# Metropolitan Museum of Art (MET) Gallery Android App
+# Metropolitan Museum of Art (MET) Gallery Android App (Artify)
 
 This is an Android app that allows users to browse through the gallery of the Metropolitan Museum of Art (MET) using their public API. The app contains two screens: a search screen and a detail screen.
 
