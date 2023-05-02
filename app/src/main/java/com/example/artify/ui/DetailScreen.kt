@@ -49,19 +49,16 @@ fun DetailScreen(objectID: Int, detailViewModel: DetailViewModel = hiltViewModel
     }
     if (detailViewModel.metObjectResult.value != null) {
 
-        // Display the detail screen with the data
         val data = detailViewModel.metObjectResult.value!!
         val mainImage = remember {
             mutableStateOf(data.primaryImage)
         }
         Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-            // Display the primary image
             CustomImage(
                 mainImage.value, modifier = Modifier
                     .fillMaxWidth()
                     .size(MainImageSize)
             )
-            // Display the additional images gallery, if available
             if (data.additionalImages.isNotEmpty()) {
                 LazyRow(modifier = Modifier.padding(defaultSpacing)) {
                     item {
@@ -86,7 +83,6 @@ fun DetailScreen(objectID: Int, detailViewModel: DetailViewModel = hiltViewModel
                     }
                 }
             }
-            // Display the overview with detailed information
             Text(
                 text = data.title,
                 color = MaterialTheme.colors.primary,

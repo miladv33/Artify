@@ -147,7 +147,7 @@ fun SearchInput(
         ) {
             Icon(
                 tint = MaterialTheme.colors.primary,
-                imageVector = Icons.Default.Search, contentDescription = "Search"
+                imageVector = Icons.Default.Search, contentDescription = stringResource(id = R.string.search_tag)
             )
         }
     }
