@@ -1,6 +1,5 @@
 package com.example.artify.ui
 
-import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
@@ -10,9 +9,9 @@ import androidx.navigation.compose.rememberNavController
 @Composable
 fun Artify() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "home") {
-        composable("home") {
-            Home { id -> navigateToDetail(navController, id) }
+    NavHost(navController = navController, startDestination = "search_screen") {
+        composable("search_screen") {
+            SearchScreen { id -> navigateToDetail(navController, id) }
         }
         composable(
             route = "detail/{id}",

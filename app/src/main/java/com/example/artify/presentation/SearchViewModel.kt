@@ -28,7 +28,8 @@ class SearchViewModel @Inject constructor(
     private var _searchResult: MutableLiveData<ArrayList<Int>> = MutableLiveData(ArrayList())
     val searchResult: LiveData<ArrayList<Int>> = _searchResult
     private var objectList = ArrayList<Int>()
-
+    private val _hasMoreData = MutableLiveData<Boolean>()
+    val hasMoreData: LiveData<Boolean> = _hasMoreData
     var lastSearchQuery = ""
         private set(value) {
             field = value
@@ -55,6 +56,15 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun handleSuccessResult(searchResult: SearchResult) {
+        setHasMore(searchResult.hasMoreData)
+        addItems(searchResult)
+    }
+
+    private fun setHasMore(hasMoreData: Boolean) {
+        _hasMoreData.value = hasMoreData
+    }
+
+    private fun addItems(searchResult: SearchResult) {
         val newList = ArrayList<Int>()
         newList.addAll(objectList)
         newList.addAll(searchResult.objectIDs)
@@ -63,6 +73,7 @@ class SearchViewModel @Inject constructor(
     }
 
     fun clearResults() {
+        _hasMoreData.value = false
         objectList.clear()
         _searchResult.value = ArrayList()
     }

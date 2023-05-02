@@ -1,6 +1,8 @@
 package com.example.artify.data.repository.safecall
 
+import com.example.artify.data.enum.Error
 import com.example.artify.data.map.delegate.failedmap.FailedMapperDelegate
+import com.example.artify.data.model.CustomException
 
 class SafeCallDelegateImpl(private val failedMapperDelegate: FailedMapperDelegate) : SafeCallDelegate,
     FailedMapperDelegate by failedMapperDelegate {

@@ -23,6 +23,7 @@ class PageManger : IPageManger<List<Int>> {
 
     override fun setCachedData(lastQuery: String, data: List<Int>?) {
         this.lastQuery = lastQuery.trimEnd()
+        this._searchResult?.clear()
         if (data != null) {
             this._searchResult?.addAll(data)
         }
@@ -34,6 +35,7 @@ class PageManger : IPageManger<List<Int>> {
         newList.addAll(
             getCachedDataFirstPage() ?: emptyList()
         )
-        return Result.success(SearchResult(newList))
+        val hasMoreData = _searchResult?.isNotEmpty() ?: false
+        return Result.success(SearchResult(newList, hasMoreData))
     }
 }

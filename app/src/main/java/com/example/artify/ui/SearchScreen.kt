@@ -22,15 +22,13 @@ import com.example.artify.R
 import com.example.artify.presentation.SearchViewModel
 import com.example.artify.ui.Common.ErrorIndicator
 import com.example.artify.ui.Common.LoadingIndicator
-import com.example.artify.ui.error.Dialog
-import com.example.artify.ui.loading.ArcRotationAnimation
 import com.example.artify.ui.theme.*
 import kotlinx.coroutines.delay
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun Home(searchViewModel: SearchViewModel = hiltViewModel(), onItemClick: (Int) -> Unit) {
+fun SearchScreen(searchViewModel: SearchViewModel = hiltViewModel(), onItemClick: (Int) -> Unit) {
     LoadingIndicator(searchViewModel)
     ErrorIndicator(searchViewModel)
     Column {
@@ -64,7 +62,7 @@ fun ListOfNumbers(
         ) { index, item ->
             NumberCard(item, onItemClick)
         }
-        if (!viewModel.searchResult.value.isNullOrEmpty())
+        if (!viewModel.searchResult.value.isNullOrEmpty() && viewModel.hasMoreData.value == true)
             item {
                 Box(modifier = Modifier.size(32.dp)) {
                     CircularProgressIndicator(
@@ -75,7 +73,7 @@ fun ListOfNumbers(
                     )
                 }
                 LaunchedEffect(true) {
-                    delay(500)
+                    delay(150)
                     viewModel.search(query)
                 }
             }

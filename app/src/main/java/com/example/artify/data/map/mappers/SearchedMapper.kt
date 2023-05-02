@@ -14,8 +14,8 @@ class SearchedMapper @Inject constructor(
     override fun createModelFromDTO(input: Response<SearchResultDTO>): SearchResult {
         val result = if (input.body() != null) {
             SearchResult(input.body()!!.objectIDs)
-        }else{
-            SearchResult(arrayListOf())
+        } else {
+            SearchResult(arrayListOf(), false)
         }
         return result
     }
