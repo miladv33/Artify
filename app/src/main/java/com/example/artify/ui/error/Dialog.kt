@@ -17,6 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.artify.R
 import com.example.artify.presentation.error.ShowErrorDelegate
+import com.example.artify.ui.theme.defaultSpacing
 
 /**
  * Dialog
@@ -42,7 +43,7 @@ fun Dialog(mainViewModel: ShowErrorDelegate, message: String) {
             },
             buttons = {
                 Row(
-                    modifier = Modifier.padding(all = 8.dp),
+                    modifier = Modifier.padding(all = defaultSpacing),
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Button(

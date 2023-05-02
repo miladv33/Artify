@@ -33,6 +33,13 @@ class SearchViewModel @Inject constructor(
             field = value
         }
 
+    /**
+     * @param query representing the search query that the user wants to perform.
+     * @param loadMoreData indicates whether to load more data or not. If it
+     * is set to true, it means that the function is being called to load more data for the current
+     * search query. If it is set to false, it means that the function is being called to perform a new
+     * search query.
+     */
     fun search(query: String, loadMoreData: Boolean = false) {
         if (!loadMoreData && query == lastSearchQuery) return
         if (!loadMoreData) clearResults()
@@ -72,7 +79,7 @@ class SearchViewModel @Inject constructor(
         _searchResult.value = newList
     }
 
-    fun clearResults() {
+    private fun clearResults() {
         _hasMoreData.value = false
         objectList.clear()
         _searchResult.value = ArrayList()

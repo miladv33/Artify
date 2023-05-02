@@ -1,4 +1,4 @@
-package com.example.artify.ui.Common
+package com.example.artify.ui.common
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight

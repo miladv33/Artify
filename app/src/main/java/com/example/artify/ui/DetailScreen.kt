@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -17,12 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.artify.presentation.DetailViewModel
-import com.example.artify.presentation.error.ShowErrorDelegate
-import com.example.artify.presentation.loading.ILoading
-import com.example.artify.presentation.loading.LoadingDelegate
-import com.example.artify.ui.Common.CustomImage
-import com.example.artify.ui.Common.ErrorIndicator
-import com.example.artify.ui.Common.LoadingIndicator
+import com.example.artify.ui.common.CustomImage
 import com.example.artify.ui.error.Dialog
 import com.example.artify.ui.loading.ArcRotationAnimation
 import com.example.artify.ui.theme.MainImageSize
@@ -40,7 +36,7 @@ fun DetailScreen(objectID: Int, detailViewModel: DetailViewModel = hiltViewModel
                 .fillMaxWidth(),
             contentAlignment = Alignment.Center
         ) {
-            ArcRotationAnimation()
+            CircularProgressIndicator()
         }
     }
     val errorState = detailViewModel.getErrorDialogState().observeAsState()

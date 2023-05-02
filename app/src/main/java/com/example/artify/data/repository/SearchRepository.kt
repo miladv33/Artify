@@ -1,6 +1,5 @@
 package com.example.artify.data.repository
 
-import androidx.room.PrimaryKey
 import com.example.artify.data.map.mappers.SearchedMapper
 import com.example.artify.data.paging.PageManger
 import com.example.artify.data.remote.MetService

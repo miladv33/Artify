@@ -20,8 +20,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.artify.R
 import com.example.artify.presentation.SearchViewModel
-import com.example.artify.ui.Common.ErrorIndicator
-import com.example.artify.ui.Common.LoadingIndicator
+import com.example.artify.ui.common.ErrorIndicator
+import com.example.artify.ui.common.LoadingIndicator
 import com.example.artify.ui.theme.*
 import kotlinx.coroutines.delay
 

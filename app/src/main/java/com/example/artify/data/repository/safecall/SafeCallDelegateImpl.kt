@@ -1,9 +1,8 @@
 package com.example.artify.data.repository.safecall
 
-import com.example.artify.data.enum.Error
 import com.example.artify.data.map.delegate.failedmap.FailedMapperDelegate
-import com.example.artify.data.model.CustomException
 
+/* handles exceptions and maps them to a Result object. */
 class SafeCallDelegateImpl(private val failedMapperDelegate: FailedMapperDelegate) : SafeCallDelegate,
     FailedMapperDelegate by failedMapperDelegate {
     override suspend fun <T> safeCall(call: suspend () -> Result<T>): Result<T> {

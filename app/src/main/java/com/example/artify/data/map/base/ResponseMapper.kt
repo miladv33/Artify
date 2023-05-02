@@ -6,6 +6,7 @@ import com.example.artify.data.model.Model
 import retrofit2.Response
 import com.example.artify.data.enum.Error
 
+/* an interface for mapping a response from a DTO to a model object */
 interface ResponseMapper<DTO, T : Model> {
     val failedMapperDelegate: FailedMapperDelegate
 

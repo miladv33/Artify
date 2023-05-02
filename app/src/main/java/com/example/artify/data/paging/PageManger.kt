@@ -3,6 +3,7 @@ package com.example.artify.data.paging
 import androidx.lifecycle.MutableLiveData
 import com.example.artify.data.model.SearchResult
 
+/* The PageManager class implements the IPageManager interface to manage and cache search results. */
 class PageManger : IPageManger<List<Int>> {
 
     private var _searchResult: ArrayList<Int>? = ArrayList()
