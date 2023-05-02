@@ -83,36 +83,35 @@ fun DetailScreen(objectID: Int, detailViewModel: DetailViewModel = hiltViewModel
                     }
                 }
             }
-            Text(
-                text = data.title,
-                color = MaterialTheme.colors.primary,
-                style = MaterialTheme.typography.h4,
-                modifier = Modifier.padding(defaultSpacing)
-            )
-            Text(
-                text = data.artistDisplayName,
-                color = MaterialTheme.colors.primary,
-                style = MaterialTheme.typography.h6,
-                modifier = Modifier.padding(defaultSpacing)
-            )
-            Text(
-                text = data.objectDate,
-                color = MaterialTheme.colors.primary,
-                style = MaterialTheme.typography.subtitle1,
-                modifier = Modifier.padding(defaultSpacing)
-            )
-            Text(
-                text = data.department,
-                color = MaterialTheme.colors.primary,
-                style = MaterialTheme.typography.subtitle2,
-                modifier = Modifier.padding(defaultSpacing)
-            )
-            Text(
-                text = data.objectName,
-                color = MaterialTheme.colors.primary,
-                style = MaterialTheme.typography.body1,
-                modifier = Modifier.padding(defaultSpacing)
-            )
+            Column(modifier = Modifier.padding(defaultSpacing)){
+                Text(
+                    text = data.title,
+                    color = MaterialTheme.colors.primary,
+                    style = MaterialTheme.typography.h4,
+                )
+                Text(
+                    text = data.artistDisplayName,
+                    color = MaterialTheme.colors.primary,
+                    style = MaterialTheme.typography.h6,
+                )
+                Text(
+                    text = data.objectDate,
+                    color = MaterialTheme.colors.primary,
+                    style = MaterialTheme.typography.subtitle1,
+                )
+                Text(
+                    text = data.department,
+                    color = MaterialTheme.colors.primary,
+                    style = MaterialTheme.typography.subtitle2,
+                )
+                Text(
+                    text = data.objectName,
+                    color = MaterialTheme.colors.primary,
+                    style = MaterialTheme.typography.body1,
+                )
+            }
+
+
         }
     }
 }

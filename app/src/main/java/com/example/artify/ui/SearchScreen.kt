@@ -95,7 +95,7 @@ fun NumberCard(number: Int, onItemClick: (Int) -> Unit) {
                     text = number.toString(),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = MaterialTheme.colors.primary
                 )
             }
 
