@@ -21,7 +21,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.artify.R
 import com.example.artify.data.enum.ImageLoading
-import com.example.artify.ui.loading.SimpleArcRotation
+import com.example.artify.ui.loading.ArcRotationAnimation
 import com.example.artify.ui.theme.Shapes
 import com.example.artify.ui.theme.cardImageHeight
 import com.example.artify.ui.theme.loadingImageSize
@@ -36,7 +36,7 @@ fun LoadingImage() {
         contentAlignment = Alignment.Center,
 
         ) {
-        SimpleArcRotation()
+        ArcRotationAnimation()
     }
 }
 
@@ -75,7 +75,7 @@ fun CustomImage(
                     .fillMaxWidth()
                     .height(cardImageHeight)
             ) {
-                SimpleArcRotation()
+                ArcRotationAnimation()
             }
         }
         if (imageState.value == ImageLoading.ERROR) {
